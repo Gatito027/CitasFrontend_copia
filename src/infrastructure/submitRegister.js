@@ -1,7 +1,7 @@
-import { fetchFactory } from "./fetchFactory"; 
+import { fetchFactory } from "../utils/FetchFactory";
+
 const url = import.meta.env.VITE_AUTH_API + "/api/Users/AddNewUser";
 //const url = "/api/Users/AddNewUser";
-
 
 export async function submitRegister({ user, email, password, repetedPassword, edad, telefono, rol }) {
   if (password !== repetedPassword) {
@@ -17,17 +17,47 @@ export async function submitRegister({ user, email, password, repetedPassword, e
     Role: rol,
   };
 
-  const response = await fetchFactory({
-    url: url, // reemplaza con tu endpoint real
-    data: payload,
-    contentType: "json",
-    method: "POST",
-  });
+  try {
+    const response = await fetchFactory({
+      url,
+      data: payload,
+      contentType: "json",
+      method: "POST",
+    });
 
-  if (!response.ok) {
+    const result = await response.json();
+    //console.log(result);
+    if (!result.success) {
+      return {
+        success: false,
+        message: "Correo no válido",
+        data: result.data || null,
+      };
+    }
+
+    if (result.success) {
+      return {
+        success: true,
+        message: result.message,
+        data: result.data,
+      };
+    }
+
     const errorData = await response.json();
-    throw new Error(errorData.message || "Error en el registro");
-  }
+    console.error(errorData.message || "Error en el registro");
 
-  return await response.json();
+    return {
+      success: false,
+      message: "Error al registrar",
+      data: errorData,
+    };
+  } catch (error) {
+    console.error("Error en submitRegister:", error);
+
+    return {
+      success: false,
+      message: "Servicio no disponible",
+      data: null,
+    };
+  }
 }

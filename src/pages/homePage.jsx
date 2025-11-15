@@ -1,25 +1,24 @@
 //import { useEffect } from "react";
 //import { useNavigate } from "react-router-dom";
-import { useEmail } from "../context/useUserData";
-import LoginPage from './loginPage';
+import { useRol } from "../context/UseUserData";
+import LoginPage from './LoginPage';
+//import NoDisponibleComponent from "../components/NoDisponibleComponent";
+import UserListComponent from "../components/UserListComponent";
+import CitasListComponent from "../components/CitasListComponent";
 
 export default function HomePage() {
   //const navigate = useNavigate();
-  const { userEmail } = useEmail();
-
-  
-    if (!userEmail) {
-      //navigate("/login");
+  const { userRol } = useRol();
+    if (!userRol) {
       return(
       <LoginPage />
       );
     }
+    if (userRol === "Administrador"){
+      return(<UserListComponent/>);
+    }
 
   return (
-    <div className="mt-15">
-      <h1 className="text-4xl font-bold text-center text-sky-600 mb-6">
-        Home
-      </h1>
-    </div>
+    <CitasListComponent />
   );
 }

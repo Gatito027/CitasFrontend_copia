@@ -1,27 +1,54 @@
-import { fetchFactory } from "./fetchFactory"; 
+import { fetchFactory } from "../utils/FetchFactory";
 
 const url = import.meta.env.VITE_AUTH_API + "/api/Users/Login";
-//const url = "/api/Users/Login";
 
-export async function submitLogin({ loginEmail, password }) {
-  
-
+export async function SubmitLogin({ loginEmail, password }) {
   const payload = {
-    email: loginEmail,
-    password: password,
+    Email: loginEmail,
+    Password: password,
   };
 
-  const response = await fetchFactory({
-    url: url, // reemplaza con tu endpoint real
-    data: payload,
-    contentType: "json",
-    method: "POST",
-  });
+  try {
+    const response = await fetchFactory({
+      url,
+      data: payload,
+      contentType: "json",
+      method: "POST",
+    });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Error en el login");
+    const result = await response.json();
+    //console.log(result.data);
+
+    if (!result.success || result.data === null) {
+      return {
+        success: false,
+        message: "Correo o contraseña no válida",
+        data: result.data || null,
+      };
+    }
+
+    if (result.success) {
+      return {
+        success: true,
+        message: result.message,
+        data: result.data,
+      };
+    }
+
+    console.error(result.message || "Error en el servidor");
+
+    return {
+      success: false,
+      message: result.message || "Correo o contraseña no válida",
+      data: result.data || null,
+    };
+  } catch (error) {
+    console.error("Error en SubmitLogin:", error);
+
+    return {
+      success: false,
+      message: "Servicio no disponible",
+      data: null,
+    };
   }
-
-  return await response.json();
 }

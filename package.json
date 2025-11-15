@@ -10,18 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "chart.js": "^4.5.1",
     "dotenv": "^17.2.3",
     "leaflet": "^1.9.4",
     "material-icons": "^1.13.14",
     "react": "^19.1.1",
     "react-chartjs-2": "^5.3.1",
-=======
-    "dotenv": "^17.2.3",
-    "material-icons": "^1.13.14",
-    "react": "^19.1.1",
->>>>>>> 2ab88af6759daf2e0cc2875657956667b29e9e29
     "react-dom": "^19.1.1",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.9.3",
@@ -36,12 +30,8 @@
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
-<<<<<<< HEAD
     "eslint": "^9.38.0",
     "eslint-plugin-import": "^2.32.0",
-=======
-    "eslint": "^9.36.0",
->>>>>>> 2ab88af6759daf2e0cc2875657956667b29e9e29
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",

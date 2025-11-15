@@ -40,3 +40,11 @@ export const useRol = () => {
   }
   return { userRol: context.rol, setRol: context.setRol };
 };
+
+export const useSub = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useSub debe usarse dentro de UserContextProvider");
+  }
+  return { userSub : context.sub, setSub: context.setSub}
+};

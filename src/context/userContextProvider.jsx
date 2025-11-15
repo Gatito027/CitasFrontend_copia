@@ -2,8 +2,8 @@ import { useState } from "react";
 import { UserContext } from "./UserContext";
 
 export function UserContextProvider({ children }) {
+  const [sub, setSub] = useState(null);
   const [user, setUser] = useState(null);
-  const [ready, setReady] = useState(false);
   const [edad, setEdad] = useState(null);
   const [email, setEmail] = useState(null);
   const [telefono, setTelefono] = useState(null); // corregido
@@ -14,8 +14,6 @@ export function UserContextProvider({ children }) {
       value={{
         user,
         setUser,
-        ready,
-        setReady,
         edad,
         setEdad,
         email,
@@ -24,6 +22,8 @@ export function UserContextProvider({ children }) {
         setTelefono,
         rol,
         setRol,
+        sub,
+        setSub
       }}
     >
       {children}

@@ -5,26 +5,28 @@ import { useNavigate } from "react-router-dom";
 export function useLogout() {
   const {
     setUser,
-    setReady,
     setEdad,
     setEmail,
     setTelefono,
     setRol,
+    setSub,
   } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const logout = () => {
     // 1. Eliminar token
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("sub");
+    sessionStorage.removeItem("token_expires");
 
     // 2. Limpiar contexto
     setUser(null);
-    setReady(false);
     setEdad(null);
     setEmail(null);
     setTelefono(null);
     setRol(null);
+    setSub(null);
 
     // 3. Redirigir
     navigate("/login");
