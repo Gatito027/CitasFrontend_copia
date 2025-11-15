@@ -9,6 +9,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/setupTests.ts'
+<<<<<<< HEAD
   }/*,
   server: {
     proxy: {
@@ -19,9 +20,20 @@ export default defineConfig({
       },
       '/p' :{
         target: 'https://profesional.runasp.net',
+=======
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://www.citaslogin.somee.com',
+>>>>>>> 2ab88af6759daf2e0cc2875657956667b29e9e29
         changeOrigin: true,
         secure: false,
       }
     }
+<<<<<<< HEAD
   }*/
+=======
+  }
+>>>>>>> 2ab88af6759daf2e0cc2875657956667b29e9e29
 })
